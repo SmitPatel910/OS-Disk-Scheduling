@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>DISK SCHEDULING ALGORITHM</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <script src="./js/fcfs.js"></script>
+  <script src="./js/sstf.js"></script>
+  <script src="./js/scan.js"></script>
+  <script src="./js/cscan.js"></script>
+  <script src="./js/look.js"></script>
+  <script src="./js/clook.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+ <script src="./js/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-compact-disc"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">DISK SCHEDULING</sup></div>
+      </a>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">
+          <i class="fas fa-fw fa-hotel"></i>
+          <span>HOME</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+         View Visualization
+      </div>
+
+      <!-- Nav Item - Pages Collapse Menu 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Components</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Custom Components:</h6>
+            <a class="collapse-item" href="buttons.html">Buttons</a>
+            <a class="collapse-item" href="cards.html">Cards</a>
+          </div>
+        </div>
+      </li>
+    -->
+    <li class="nav-item">
+      <a class="nav-link" href="fcfs.html">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>FCFS</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="sstf.html">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>SSTF</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="scan.html">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>SCAN</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="cscan.html">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>CSCAN</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="look.html">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>LOOK</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="clook.html">
+        <i class="fas fa-fw fa-chart-area"></i>
+        <span>CLOOK</span></a>
+      </li>
+      <!-- Nav Item - Utilities Collapse Menu 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fas fa-fw fa-wrench"></i>
+          <span>Utilities</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Custom Utilities:</h6>
+            <a class="collapse-item" href="utilities-color.html">Colors</a>
+            <a class="collapse-item" href="utilities-border.html">Borders</a>
+            <a class="collapse-item" href="utilities-animation.html">Animations</a>
+            <a class="collapse-item" href="utilities-other.html">Other</a>
+          </div>
+        </div>
+      </li>
+    -->
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Compare Algorithms
+      </div>
+
+      <!-- Nav Item - Pages Collapse Menu
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Pages</span>
+        </a>
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Login Screens:</h6>
+            <a class="collapse-item" href="login.html">Login</a>
+            <a class="collapse-item" href="register.html">Register</a>
+            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+            <div class="collapse-divider"></div>
+            <h6 class="collapse-header">Other Pages:</h6>
+            <a class="collapse-item" href="404.html">404 Page</a>
+            <a class="collapse-item" href="blank.html">Blank Page</a>
+          </div>
+        </div>
+      </li>
+    -->
+      <!-- Nav Item - Charts -->
+      <li class="nav-item">
+        <a class="nav-link" href="blank.html">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Charts</span></a>
+      </li>
+
+      <!-- Nav Item - Tables 
+      <li class="nav-item">
+        <a class="nav-link" href="tables.html">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Tables</span></a>
+      </li>
+    -->
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+
+          <h1 class="fluid d-none d-lg-inline-block col-lg-8 col-md-6" style="font-size:medium;font-weight:bolder;text-align:center; color: #4e73df;">OPERATING SYSTEM PROJECT</h1>
+          <!-- Topbar Search 
+          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+          </form> 
+        -->
+
+          <!-- Topbar Navbar -->
+          <ul class="navbar-nav ml-auto">
+
+            <!-- Nav Item - Search Dropdown (Visible Only XS) 
+            <li class="nav-item dropdown no-arrow d-sm-none">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+              </a> -->
+              <!-- Dropdown - Messages 
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                  <div class="input-group">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>-->
+            </li>
+
+            <!-- Nav Item - Alerts 
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
+                -->
+                <!-- Counter - Alerts
+                <span class="badge badge-danger badge-counter">3+</span>
+              </a>
+            -->
+              <!-- Dropdown - Alerts 
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                  Alerts Center
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-primary">
+                      <i class="fas fa-file-alt text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 12, 2019</div>
+                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-success">
+                      <i class="fas fa-donate text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 7, 2019</div>
+                    $290.29 has been deposited into your account!
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-warning">
+                      <i class="fas fa-exclamation-triangle text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 2, 2019</div>
+                    Spending Alert: We've noticed unusually high spending for your account.
+                  </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+              </div>
+            </li>
+            -->
+            <!-- Nav Item - Messages
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-envelope fa-fw"></i>
+              -->
+                <!-- Counter - Messages 
+                <span class="badge badge-danger badge-counter">7</span>
+              </a>
+              -->
+              <!-- Dropdown - Messages 
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+                <h6 class="dropdown-header">
+                  Message Center
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="dropdown-list-image mr-3">
+                    <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
+                    <div class="status-indicator bg-success"></div>
+                  </div>
+                  <div class="font-weight-bold">
+                    <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div>
+                    <div class="small text-gray-500">Emily Fowler · 58m</div>
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="dropdown-list-image mr-3">
+                    <img class="rounded-circle" src="https://source.unsplash.com/AU4VPcFN4LE/60x60" alt="">
+                    <div class="status-indicator"></div>
+                  </div>
+                  <div>
+                    <div class="text-truncate">I have the photos that you ordered last month, how would you like them sent to you?</div>
+                    <div class="small text-gray-500">Jae Chun · 1d</div>
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="dropdown-list-image mr-3">
+                    <img class="rounded-circle" src="https://source.unsplash.com/CS2uCrpNzJY/60x60" alt="">
+                    <div class="status-indicator bg-warning"></div>
+                  </div>
+                  <div>
+                    <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
+                    <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="dropdown-list-image mr-3">
+                    <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="">
+                    <div class="status-indicator bg-success"></div>
+                  </div>
+                  <div>
+                    <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
+                    <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                  </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+              </div>
+            </li>
+
+            <div class="topbar-divider d-none d-sm-block"></div>
+          -->
+            <!-- Nav Item - User Information -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">TEAM DETAILS</span>
+                <img class="img-profile rounded-circle" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSSj3yKqVnHiFa2hRLRQOA_cPEaYLZMbZOQ1Q&usqp=CAU">
+              </a>
+              <!-- Dropdown - User Information -->
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  VRAJ SHAH
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  PARTH CHOKSI
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  SAMYAK VORA
+                </a>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  SMIT PATEL
+                </a>
+            </li>
+
+          </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+        <form id="invisible">
+          <div class="form-group col-lg-12">
+            <label for="maxtrack">Enter the maximum track size :</label>
+            <input type="number" class="form-control" id="maxtrack" value=""><br>
+            <label for="starttrack">Enter the starting track :</label>
+            <input type="number" class="form-control" id="starttrack" value=""><br>
+            <label for="request">Enter the request order of tracks (separated by comma) :</label>
+            <input type="textfield" class="form-control" id="request" value="">
+            <button type="button" class="container-fluid col-lg-4 btn btn-success" style="margin-top:2%;" onclick="generatereq()">SHOW GRAPH</button>
+          </div>
+        </form>  
+        <div class="col-sm-11 card shadow mb-4" style="visibility: hidden;"id="e1">
+          <!-- Card Header - Accordion -->
+          <a href="#collapseCardExample1"  class="bg-success d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+            <h6 class="m-0 font-weight-bold text-white">DOUGHNUT-CHART</h6>
+          </a>
+          <!-- Card Content - Collapse -->
+          <div class="collapse hide" id="collapseCardExample1">
+            <div class="card-body">
+              <div class=" bg-white border-0 d-flex justify-content-sm-center justify-content-lg-end">
+                <button class="btn bg-gradient-danger text-white" id="download1"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</button>
+              </div>
+              <div class="text-center" id="dou">
+                <canvas id="myChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>  
+    
+          <div class="col-sm-11 card shadow mb-4"style="visibility: hidden;" id="e2">
+            <!-- Card Header - Accordion -->
+            <a href="#collapseCardExample2" class="bg-primary d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+              <h6 class="m-0 font-weight-bold text-white">BAR-CHART</h6>
+            </a>
+            <!-- Card Content - Collapse -->
+            <div class="collapse hide" id="collapseCardExample2">
+              <div class="card-body">
+               <div class=" bg-white border-0 d-flex justify-content-sm-center justify-content-lg-end">
+                  <button class="btn bg-gradient-danger text-white" id="download2"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</button>
+                </div>
+                <div class="text-center" id="bar">
+                  <canvas id="myChart2"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>  
+            <div class="col-sm-11 card shadow mb-4" style="visibility: hidden;" id="e3">
+              <!-- Card Header - Accordion -->
+              <a href="#collapseCardExample3" class="bg-warning d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                <h6 class="m-0 font-weight-bold text-white">PIE-CHART</h6>
+              </a>
+              <!-- Card Content - Collapse -->
+              <div class="collapse hide" id="collapseCardExample3">
+                <div class="card-body">
+                  <div class=" bg-white border-0 d-flex justify-content-sm-center justify-content-lg-end">
+                    <button class="btn bg-gradient-danger text-white" id="download3"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</button>
+                  </div>
+                  <div class="text-center" id="pie">
+                    <canvas id="myChart3"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>  
+       <script>
+         var s
+           var t;
+           var max_track_size;
+          var start_track;
+          var seek_queue=[];
+            var request_queue=[];
+            var request_queue1=[];
+            var request_queue2=[];
+            var request_queue3=[];
+            var request_queue4=[];
+            var request_queue5=[];
+            
+         function generatereq(){
+          s=document.getElementById("request").value;
+          t="";
+          max_track_size=parseInt(document.getElementById("maxtrack").value);
+          start_track=parseInt(document.getElementById("starttrack").value);
+           for(var i=0;i<s.length;i++)
+           {
+              if(s[i]===',')
+              {
+                var j=parseInt(t);
+                request_queue.push(j);
+            request_queue1.push(j);
+                 request_queue2.push(j);
+          request_queue3.push(j);
+          request_queue4.push(j);
+          request_queue5.push(j);
+                t="";
+              }
+              else
+              {
+                t+=s[i];
+              }
+           }
+           var j=parseInt(t);
+           direction="right";
+          request_queue.push(j);
+          request_queue1.push(j);
+          request_queue2.push(j);
+          request_queue3.push(j);
+          request_queue4.push(j);
+          request_queue5.push(j);
+          var ans1=fcfsqueue();
+          var ans2=sstfqueue();
+          var ans3=scanqueue();
+          var ans4=cscanqueue();
+          var ans5=lookqueue();
+          var ans6=clookqueue();
+          console.log(request_queue);
+          console.log("fcfs" +ans1);
+          console.log("sstf"+ans2);
+          console.log("scan"+ans3);
+          console.log("cscan"+ans4);
+          console.log("look"+ans5);
+          console.log("clook"+ans6);
+          document.getElementById("invisible").style.display = "none";
+          document.getElementById("e1").style.visibility="visible";
+          document.getElementById("e2").style.visibility="visible";
+          document.getElementById("e3").style.visibility="visible";
+          document.getElementById("dou").style.display = "block";
+          let myDoughnutChart = document.getElementById("myChart").getContext('2d');
+          var data1=[ans1,ans2,ans3,ans4,ans5,ans6];
+let chart1 = new Chart(myDoughnutChart, {
+    type: 'doughnut',
+    data: {
+        labels: ['FCFS', 'SSFT','SCAN','CSCAN','LOOK','CLOOK',],
+        datasets: [ {
+            data: data1,
+            backgroundColor: ['#49A9EA', '#36CAAB','#49A9VF', '#36CA39','#49A965', '#36C56B']
+        }]
+    },
+    options: {
+        title: {
+            text: "SEEK TIME VS DIFFERENT ALGORITHMS",
+            display: true
+        }
+    }
+});
+let labels2 = ['FCFS', 'SSFT','SCAN','CSCAN','LOOK','CLOOK',];
+let data2 = data1;
+let colors2 = ['#49A9EA', '#36CAAB', '#34495E', '#B370CF', '#36CA39','#49A965',];
+
+let myChart2 = document.getElementById("myChart2").getContext('2d');
+
+let chart2 = new Chart(myChart2, {
+    type: 'bar',
+    data: {
+        labels: labels2,
+        datasets: [ {
+            data: data2,
+            backgroundColor: colors2
+        }]
+    },
+    options: {
+        title: {
+            text: "Compare all  through bar graph",
+            display: true
+        },
+        legend: {
+          display: false
+        }
+    }
+});
+document.getElementById("bar").style.display = "block";
+let labels3 = ['FCFS', 'SSFT','SCAN','CSCAN','LOOK','CLOOK',];
+let myChart3 = document.getElementById("myChart3").getContext('2d');
+let data3 = data1;
+let colors3 = ['#49A9EA', '#36CAAB', '#34495E', '#B370CF', '#AC5353', '#CFD4D8'];
+let chart3 =  new Chart(myChart3, {
+    type: 'pie',
+    data: {
+        labels: labels3,
+        datasets: [ {
+            data: data3,
+            backgroundColor: colors3
+        }]
+    },
+    options: {
+        title: {
+            text: "COMPARE ALGO THROUGH PIE CHART",
+            display: true
+        }
+    }
+});
+document.getElementById("pie").style.display = "block";
+         }
+      </script>
+                
+
+             
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="vendor/chart.js/Chart.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="js/demo/chart-area-demo.js"></script>
+  <script src="js/demo/chart-pie-demo.js"></script>
+
+</body>
+
+</html>

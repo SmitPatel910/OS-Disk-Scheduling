@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>OS PROJECT</title>
+        <style>
+            body{
+                margin:0%;
+                padding:0%;
+            }
+            canvas{
+                border:2px solid black;
+                margin-left: 1%;
+                margin-top: 1%;
+                display: grid;
+            }
+            .heading{
+                background-color:#05e3ff;
+                padding-top: 0.01%;
+                padding-bottom: 0.01%;
+                margin-block-start: 0%;
+                margin:0%;
+                text-align: center;
+                font-family: cursive;
+                border: 1px solid black;
+            }
+            .takeinput{
+                display: block;
+                margin-left: 0%;
+            }
+            .maincontainer{
+                display: inline-grid;
+                grid-template-columns: auto auto;
+                width: 100%;
+            }
+            table, td {
+                border: 2px solid black;
+            }
+            </style>
+            <script src="./js/main.js"></script>
+            <script>
+                var max_track_size;
+                var start_track;
+                var seek_queue=[];
+                var count=0;
+                var canvas;
+                 function initializemax(l)
+                {
+                    if(l>200)
+                    {
+                        alert("Max track size should be less than or equal to 200 for best visualization.")
+                        document.getElementById("mx").value="";
+                    }
+                    else
+                    max_track_size=l;
+                }   
+              function initializestart(s)
+                {
+                    var g=document.getElementById("mx").value;
+                    if(parseInt(s)>parseInt(g))
+                    {
+                        console.log(1);
+                        alert("Start track size should be less than max track size.")
+                        document.getElementById("sr").value="";
+                    }
+                    else
+                    start_track=s;
+                }
+                function myFunction() 
+                {
+                        count++;
+                        var table = document.getElementById("myTable");
+                        var row = table.insertRow(-1);
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+                        cell1.innerHTML = count;
+                        cell2.innerHTML = '<input type="number" placeholder="Enter the track number."value="" onchange="storeinput(this.value)">';
+                }
+                function storeinput(numb){
+                    var g=document.getElementById("mx").value;
+                    if(parseInt(numb)>parseInt(g))
+                    {
+                        alert("Track number should be less than max track size entered by you before.");
+                        document.getElementById("myTable").deleteRow(-1);
+                        count--;
+                    }
+                    else
+                    seek_queue.push(parseInt(numb));
+                    }
+                    function myFunction2()
+                    {
+                        if(document.getElementById("mx").value=="")
+                        alert('Enter all the inputs first.');
+                        else if(document.getElementById("sr").value=="")
+                        alert('Enter all the inputs first.');
+                        else
+                        myfunction1();
+                    }
+            </script>    
+    </head>
+        <body>
+            <div class="heading">
+                <h1>FCFS</h1>
+            </div>
+        <div class="maincontainer">
+            <canvas>
+                <script>
+                    canvas=document.querySelector("canvas");
+                    console.log(canvas);
+                    //set height and width of canvas
+                    canvas.width=window.innerWidth-500;
+                    canvas.height=window.innerHeight-100;
+                    var d=canvas.getContext("2d");
+                    d.fillText("Please enter the input to view the visualization.",450,300,2000);
+                    </script>
+            </canvas>
+            <div class="takeinput">
+                <h1 style="text-align: center;font-family: cursive;">INPUT SECTION</h1>
+                <br>
+                <label>Enter the maximum track size :&nbsp;  <input id="mx" type="number" value=""onchange="initializemax(this.value)"></label>
+                <br>
+                <br>
+                <label>Enter the starting track number: <input id="sr" type="number" value=""onchange="initializestart(this.value)"></label>
+                <br>
+                <br>
+                
+                <table id="myTable">
+                  <tr>
+                    <td>REQUEST NUMBER</td>
+                    <td>TRACK NUMBER</td>
+                  </tr>
+                </table>
+                <br>
+                
+                <button type="button" onclick="myFunction()">Enter Input</button>
+                <button type="button" onclick="myFunction2()">Show Output</button>
+                <br>
+                <br>
+                <h2 id="answer">
+
+                </h2>
+            </div>
+        </div> 
+        </body>
+</html>
